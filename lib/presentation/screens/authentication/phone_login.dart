@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/core/constant/Color/colors.dart';
-import 'package:project/presentation/authentication/otp_screen.dart';
+import 'package:project/presentation/screens/authentication/otp_screen.dart';
 
 class PhoneLogin extends StatefulWidget {
   const PhoneLogin({super.key});
@@ -18,7 +18,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
   bool _isLoading = false;
   String? _status;
 
-  // 🔥 SAME logic you used in PhoneNumberPage
+  // PhoneNumberPage
   Future<void> _verifyPhone() async {
     if (_phoneNumber.isEmpty) {
       setState(() => _status = "Enter phone number");
@@ -82,7 +82,6 @@ class _PhoneLoginState extends State<PhoneLogin> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// image
               Expanded(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -96,50 +95,45 @@ class _PhoneLoginState extends State<PhoneLogin> {
                   },
                 ),
               ),
-
               const Text(
                 'Login with your Phone Number',
                 style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
+                  fontSize: 20,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
                 ),
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
-              IntlPhoneField(
-                disableAutoFillHints: true,
-                initialCountryCode: 'IN',
-
-                // typed text color
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                ),
-
-                // +91 color
-                dropdownTextStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                ),
-
-                cursorColor: Colors.pinkAccent,
-
-                decoration: InputDecoration(
-                  hintText: 'Enter phone number',
-                  labelText: 'Enter phone number',
-                  hintStyle: const TextStyle(color: Colors.white54),
-                  labelStyle: const TextStyle(color: Colors.white70),
-                  filled: true,
-                  fillColor: const Color(0xFF1E1E1E),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: IntlPhoneField(
+                  disableAutoFillHints: true,
+                  initialCountryCode: 'IN',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
                   ),
+                  dropdownTextStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                  ),
+                  cursorColor: Colors.pinkAccent,
+                  decoration: InputDecoration(
+                    hintText: 'Enter phone number',
+                    labelText: 'Enter phone number',
+                    hintStyle: const TextStyle(color: Colors.black45),
+                    labelStyle: const TextStyle(color: Colors.black54),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 242, 238, 238),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onChanged: (phone) {
+                    _phoneNumber = phone.completeNumber;
+                  },
                 ),
-
-                onChanged: (phone) {
-                  _phoneNumber = phone.completeNumber;
-                },
               ),
-
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : DecoratedBox(
@@ -148,7 +142,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                         gradient: AppColors.buttonGradient,
                       ),
                       child: ElevatedButton(
-                        onPressed: _verifyPhone, // 🔥 changed here
+                        onPressed: _verifyPhone,
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size.fromHeight(50),
                           backgroundColor: Colors.transparent,
@@ -160,16 +154,21 @@ class _PhoneLoginState extends State<PhoneLogin> {
                         ),
                         child: const Text(
                           'Continue',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
-
               if (_status != null) ...[
-                const SizedBox(height: 12),
-                Text(
-                  _status!,
-                  style: const TextStyle(color: Colors.red),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    _status!,
+                    style: const TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ],

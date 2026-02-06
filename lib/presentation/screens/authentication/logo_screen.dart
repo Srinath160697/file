@@ -12,33 +12,31 @@ class LogoScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: AppColors.backgroundGradient,
         ),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Create & Inspire Videos',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w200,
-                      ),
+              const Column(
+                children: [
+                  Text(
+                    'Create & Inspire Apps',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w200,
                     ),
-                    Text(
-                      'Login with E-mail or Phone Number',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+                  ),
+                  Text(
+                    'Login with E-mail or Phone Number',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Expanded(
                 child: LayoutBuilder(
@@ -57,7 +55,6 @@ class LogoScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
                   vertical: 20,
                 ),
                 child: Column(
@@ -70,7 +67,6 @@ class LogoScreen extends StatelessWidget {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          // Handle login ABC
                           Navigator.pushNamed(context, '/LoginPage');
                         },
                         style: ElevatedButton.styleFrom(
@@ -92,7 +88,7 @@ class LogoScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 5.h),
+                    SizedBox(height: 8.h),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/PhoneLogin');

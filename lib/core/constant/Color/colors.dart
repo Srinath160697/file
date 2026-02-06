@@ -7,10 +7,10 @@ class AppColors {
     end: Alignment.bottomLeft,
     colors: [
       Color(0xFFD02E76),
-      Color(0xFF1B1919),
-      Color(0xFF1B1919),
-      Color(0xFF1B1919),
-      Color(0xFF1B1919),
+      Color.fromARGB(255, 242, 238, 238),
+      Color.fromARGB(255, 242, 238, 238),
+      Color.fromARGB(255, 242, 238, 238),
+      Color.fromARGB(255, 242, 238, 238),
       Color(0xFFD02E76),
     ],
   );
@@ -18,8 +18,8 @@ class AppColors {
     begin: Alignment.topRight,
     colors: [
       Color(0xFFD02E76),
-      Color(0xFF1B1919),
-      Color(0xFF1B1919),
+      Color.fromARGB(255, 242, 238, 238),
+      Color.fromARGB(255, 242, 238, 238),
     ],
   );
   static const LinearGradient buttonGradient = LinearGradient(

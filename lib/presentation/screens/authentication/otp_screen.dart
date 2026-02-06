@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/core/constant/Color/colors.dart';
-import 'package:project/presentation/Home_Screen/home_screen.dart';
+import 'package:project/presentation/screens/home_screen/home_screen.dart';
 
 class Otpscreen extends StatefulWidget {
   final String verificationId;
@@ -61,11 +61,11 @@ class _OtpscreenState extends State<Otpscreen> {
       height: 56,
       textStyle: const TextStyle(
         fontSize: 20,
-        color: Colors.white,
+        color: Colors.black,
         fontWeight: FontWeight.w600,
       ),
       decoration: BoxDecoration(
-        color: Colors.white10,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.white24),
       ),
@@ -111,7 +111,7 @@ class _OtpscreenState extends State<Otpscreen> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       SizedBox(height: 2.h),
@@ -119,14 +119,14 @@ class _OtpscreenState extends State<Otpscreen> {
                         'OTP sent to ${widget.phone}',
                         style: const TextStyle(
                           fontSize: 16,
-                          color: Colors.white70,
+                          color: Colors.black54,
                         ),
                       ),
                     ],
                   ),
                 ),
 
-                /// 🔥 Pinput connected
+                ///  Pinput connected
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Pinput(
@@ -163,31 +163,34 @@ class _OtpscreenState extends State<Otpscreen> {
                       ),
 
                 if (_error != null) ...[
-                  const SizedBox(height: 12),
-                  Text(
-                    _error!,
-                    style: const TextStyle(color: Colors.red),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Text(
+                      _error!,
+                      style: const TextStyle(color: Colors.red),
+                    ),
                   ),
                 ],
 
-                const SizedBox(height: 20),
-
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Didn't receive the code?",
-                      style: TextStyle(color: Colors.white70),
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      'Resend',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                const Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Didn't receive the code?",
+                        style: TextStyle(color: Colors.black54),
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 5),
+                      Text(
+                        'Resend',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
                 const Spacer(flex: 3),

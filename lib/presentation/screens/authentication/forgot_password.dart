@@ -53,71 +53,73 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         decoration: const BoxDecoration(
           gradient: AppColors.backgroundGradient,
         ),
+        padding: const EdgeInsets.symmetric(horizontal: 25),
         child: SafeArea(
           child: SingleChildScrollView(
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Forgot Password',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Forgot Password',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
-                      const Text(
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
                         "Enter your email to receive password reset instructions",
                         style: TextStyle(
                           fontSize: 16,
-                          color: Colors.white,
+                          color: Colors.black54,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      // const SizedBox(height: 20),
-                      StyledTextField(
-                        controller: _emailController,
-                        labelText: 'Email',
-                      ),
-                      // const SizedBox(height: 20),
-                      _isLoading
-                          ? const CircularProgressIndicator()
-                          : DecoratedBox(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                gradient: AppColors.buttonGradient,
-                              ),
-                              child: ElevatedButton(
-                                onPressed: _handleResetPassword,
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: const Size.fromHeight(50),
-                                  backgroundColor: Colors.transparent,
-                                  shadowColor: Colors.transparent,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  foregroundColor: Colors.white,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    StyledTextField(
+                      controller: _emailController,
+                      labelText: 'Email',
+                    ),
+                    _isLoading
+                        ? const CircularProgressIndicator()
+                        : DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: AppColors.buttonGradient,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: _handleResetPassword,
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(50),
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: const Text(
-                                  ' Sent Reset Email',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                foregroundColor: Colors.white,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 14),
+                              ),
+                              child: const Text(
+                                ' Sent Reset Email',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                      if (_message != null) ...[
-                        Text(
+                          ),
+                    if (_message != null) ...[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
                           _message!,
                           style: TextStyle(
                             color: _message!.startsWith('Password')
@@ -126,9 +128,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                      ],
+                      ),
                     ],
-                  ),
+                  ],
                 ),
               ),
             ),

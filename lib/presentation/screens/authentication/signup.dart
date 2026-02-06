@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:project/core/constant/Color/colors.dart';
 import 'package:project/core/constant/Widgets/common_widgets.dart';
-import 'package:project/presentation/Home_Screen/home_screen.dart';
-import 'package:project/presentation/authentication/forgot_password.dart';
-import 'package:project/presentation/authentication/signup.dart';
-import 'package:project/presentation/todo_screens/show_listview.dart';
-import 'package:project/services/services.dart';
+import 'package:project/data/firebase_service/services.dart';
+import 'package:project/presentation/screens/authentication/email_login.dart';
 
-class EmailLoginPage extends StatefulWidget {
-  const EmailLoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<EmailLoginPage> createState() => _EmailLoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _EmailLoginPageState extends State<EmailLoginPage> {
+class _SignupPageState extends State<SignupPage> {
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final FirebaseService _authService = FirebaseService();
@@ -22,28 +20,26 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
   bool _isLoading = false;
   String? _error;
 
-  Future<void> _handleLogin() async {
+  Future<void> _handleSignup() async {
     setState(() {
       _isLoading = true;
       _error = null;
     });
-
-    final error = await _authService.login(
+    final error = await _authService.signUp(
+      name: _nameController.text.trim(),
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
     );
-
     if (error == null) {
       if (mounted) {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) => const EmailLoginPage()),
         );
       }
     } else {
       setState(() => _error = error);
     }
-
     setState(() => _isLoading = false);
   }
 
@@ -62,16 +58,18 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Welcome to Email Login',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      const Text('Sign Up',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          )),
+                      StyledTextField(
+                        controller: _nameController,
+                        labelText: 'Name',
                       ),
                       StyledTextField(
                         controller: _emailController,
@@ -80,36 +78,16 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                       StyledTextField(
                         controller: _passwordController,
                         labelText: 'Password',
-                        obscureText: true,
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const ForgotPasswordPage(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ),
                       ),
                       _isLoading
-                          ? const CircularProgressIndicator()
+                          ? const Center(child: CircularProgressIndicator())
                           : DecoratedBox(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
                                 gradient: AppColors.buttonGradient,
                               ),
                               child: ElevatedButton(
-                                onPressed: _handleLogin,
+                                onPressed: _handleSignup,
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: const Size.fromHeight(50),
                                   backgroundColor: Colors.transparent,
@@ -123,7 +101,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                                       const EdgeInsets.symmetric(vertical: 14),
                                 ),
                                 child: const Text(
-                                  'Login',
+                                  'Sign Up',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -133,23 +111,15 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                             ),
                       TextButton(
                         onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const SignupPage(),
-                          ),
-                        ),
-                        child: const Text(
-                          "Don't have an account? Sign Up",
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const EmailLoginPage())),
+                        child: const Text("Already have an account? Login"),
                       ),
                       if (_error != null) ...[
-                        Text(
-                          _error!,
-                          style: const TextStyle(color: Colors.red),
-                        ),
+                        const SizedBox(height: 10),
+                        Text(_error!,
+                            style: const TextStyle(color: Colors.red)),
                       ],
                     ],
                   ),
