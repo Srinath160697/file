@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 child: const Text(
-                                  "Start",
+                                  "Start-time",
                                   style: TextStyle(
                                     color: Colors.pinkAccent,
                                     fontWeight: FontWeight.w600,
@@ -209,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                                child: const Text("Stop"),
+                                child: const Text("Stop-time"),
                               ),
                             ),
                           ],
